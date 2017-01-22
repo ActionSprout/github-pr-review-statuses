@@ -1,13 +1,4 @@
 // Going to find all the Review Status for PR's on the page.
-const general_styles = {
-  'display': 'inline-block',
-  'padding': '6px 8px',
-  'margin-top': '5px',
-  'border-radius': '3px',
-  'font-size': '1.1em',
-  'text-decoration': 'none',
-  'line-height': '1.1',
-};
 
 const specific_styles = {
   needs_review_styles: {
@@ -30,7 +21,7 @@ const link_sets = {
 
 Object.keys(link_sets).map((links) => {
   link_sets[links]
-    .css(general_styles)
     .css(specific_styles[`${links}_styles`])
+    .addClass('label')
     .attr('target', '_blank');
 });
