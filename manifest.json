@@ -15,7 +15,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://github.com/pulls*"
+        "https://github.com/pulls*",
+        "https://github.com/*/pulls*"
       ],
       "js": ["jquery-3.1.1.min.js", "content.js"],
       "css": ["styles.css"]
