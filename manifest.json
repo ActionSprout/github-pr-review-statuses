@@ -1,5 +1,5 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "Github PR Review Status",
   "version": "0.1.1",
   "description": "This styles the review status of the Github Pull Requests page.  Useful if you want to stop using labels but still want a visual display of where PR's are at.",
