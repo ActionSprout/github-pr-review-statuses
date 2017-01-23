@@ -1,16 +1,16 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Github PR Review Status",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "This styles the review status of the Github Pull Requests page.  Useful if you want to stop using labels but still want a visual display of where PR's are at.",
   "icons": {
-    "16": "cooler-octocat-16.png",
-    "48": "cooler-octocat-48.png",
-    "128": "cooler-octocat-128.png",
-    "512": "cooler-octocat-512.png"
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png",
+    "512": "icon-512.png"
   },
   "browser_action": {
-    "default_icon": "cooler-octocat-128.png"
+    "default_icon": "icon-128.png"
   },
   "content_scripts": [
     {
