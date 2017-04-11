@@ -13,15 +13,22 @@ const specific_styles = {
 };
 
 const base_selector = 'a.tooltipped.tooltipped-s'
-const link_sets = {
-  needs_review: $(`${base_selector}[aria-label="Review required before merging"]`),
-  changes_requested: $(`${base_selector}[aria-label*="requesting changes"]`),
-  approved: $(`${base_selector}[aria-label*="review approval"]`),
-};
 
-Object.keys(link_sets).map((links) => {
-  link_sets[links]
+function setStyles() {
+  const link_sets = {
+    needs_review: $(`${base_selector}[aria-label="Review required before merging"]`),
+    changes_requested: $(`${base_selector}[aria-label*="requesting changes"]`),
+    approved: $(`${base_selector}[aria-label*="review approval"]`),
+  };
+
+  Object.keys(link_sets).map((links) => {
+    link_sets[links]
     .css(specific_styles[`${links}_styles`])
     .addClass('label')
     .attr('target', '_blank');
-});
+  });
+}
+
+setStyles();
+
+const intervalId = setInterval(setStyles, 1000);
