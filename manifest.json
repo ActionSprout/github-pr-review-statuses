@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Github PR Review Status",
   "version": "0.1.1",
-  "description": "This styles the review status of the Github Pull Requests page.  Useful if you want to stop using labels but still want a visual display of where PR's are at.",
+  "description": "Styles review statuses on the Github Pull Requests page like labels.",
   "icons": {
     "16": "icon-16.png",
     "48": "icon-48.png",
