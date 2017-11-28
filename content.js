@@ -34,7 +34,7 @@ function addASReposPRsButton() {
   let navLinks = $('.subnav-links')[0];
 
   if (navLinks.childElementCount < 5 ) {
-    const asPrLink = '<a href="/pulls?utf8=%E2%9C%93&q=is%3Apr+user%3AActionSprout+sort%3Aupdated-desc+is%3Aopen+" aria-label="Pull Requests requesting your review" class="js-selected-navigation-item subnav-item" data-selected-links="dashboard_review_requested /pulls?utf8=%E2%9C%93&q=is%3Apr+user%3AActionSprout+sort%3Aupdated-desc+is%3Aopen+" role="tab">AS Repos</a>';
+    const asPrLink = '<a href="/pulls?utf8=%E2%9C%93&q=is%3Apr+user%3AActionSprout+sort%3Aupdated-desc+is%3Aopen+" aria-label="ActionSprout open pull requests" class="js-selected-navigation-item subnav-item" role="tab">AS Repos</a>';
 
     navLinks.append($(asPrLink)[0]);
 
