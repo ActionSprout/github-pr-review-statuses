@@ -37,6 +37,8 @@ function addASReposPRsButton() {
     const asPrLink = '<a href="/pulls?utf8=%E2%9C%93&q=is%3Apr+user%3AActionSprout+sort%3Aupdated-desc+is%3Aopen+" aria-label="Pull Requests requesting your review" class="js-selected-navigation-item subnav-item" data-selected-links="dashboard_review_requested /pulls?utf8=%E2%9C%93&q=is%3Apr+user%3AActionSprout+sort%3Aupdated-desc+is%3Aopen+" role="tab">AS Repos</a>';
 
     navLinks.append($(asPrLink)[0]);
+
+    $('.subnav-search-input-wide').css('width','450px');
   }
 }
 
