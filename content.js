@@ -30,6 +30,22 @@ function applyLabelStyles() {
   });
 }
 
-applyLabelStyles();
+function addASReposPRsButton() {
+  let navLinks = $('.subnav-links')[0];
 
-const intervalId = setInterval(applyLabelStyles, 1000);
+  if (navLinks.childElementCount < 5 ) {
+    const asPrLink = '<a href="/pulls?utf8=%E2%9C%93&q=is%3Apr+user%3AActionSprout+sort%3Aupdated-desc+is%3Aopen+" aria-label="Pull Requests requesting your review" class="js-selected-navigation-item subnav-item" data-selected-links="dashboard_review_requested /pulls?utf8=%E2%9C%93&q=is%3Apr+user%3AActionSprout+sort%3Aupdated-desc+is%3Aopen+" role="tab">AS Repos</a>';
+
+    navLinks.append($(asPrLink)[0]);
+  }
+}
+
+applyLabelStyles();
+addASReposPRsButton();
+
+function intervalTick() {
+  applyLabelStyles();
+  addASReposPRsButton();
+}
+
+const intervalId = setInterval(intervalTick, 1000);
