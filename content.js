@@ -14,7 +14,7 @@ const specific_styles = {
 
 const base_selector = 'a.tooltipped.tooltipped-s'
 
-function setStyles() {
+function applyLabelStyles() {
   const link_sets = {
     needs_review: $(`${base_selector}[aria-label="Review required before merging"]`),
     changes_requested: $(`${base_selector}[aria-label*="requesting changes"]`),
@@ -29,6 +29,6 @@ function setStyles() {
   });
 }
 
-setStyles();
+applyLabelStyles();
 
-const intervalId = setInterval(setStyles, 1000);
+const intervalId = setInterval(applyLabelStyles, 1000);
