@@ -25,7 +25,8 @@ function applyLabelStyles() {
     link_sets[links]
     .css(specific_styles[`${links}_styles`])
     .addClass('label')
-    .attr('target', '_blank');
+    .attr('target', '_blank')
+    .attr('rel', 'noopener');
   });
 }
 
