@@ -12,9 +12,9 @@ const specific_styles = {
   },
 };
 
-const base_selector = 'a.tooltipped.tooltipped-s'
 
 function applyStylesToPullRequestLabels() {
+  const base_selector = 'a.tooltipped.tooltipped-s';
   const link_sets = {
     needs_review: $(`${base_selector}[aria-label="Review required before merging"]`),
     changes_requested: $(`${base_selector}[aria-label*="requesting changes"]`),
@@ -31,9 +31,9 @@ function applyStylesToPullRequestLabels() {
 }
 
 function addASReposToPullRequestButtons() {
-  const subNav = $('div.subnav-links');
+  const $subNav = $('div.subnav-links');
   const findButton = () =>
-    subNav.find('a[aria-label~=ActionSprout]')
+    $subNav.find('a[aria-label~=ActionSprout]')
   ;
   const asReposButton = findButton();
   const user = 'ActionSprout';
@@ -41,7 +41,7 @@ function addASReposToPullRequestButtons() {
 
   if (asReposButton.length === 0) {
       const newButton = `<a href="/pulls${actionSproutSearch}" aria-label="ActionSprout open pull requests" class="js-selected-navigation-item subnav-item" role="tab">AS Repos</a>`;
-      subNav.append(newButton);
+      $subNav.append(newButton);
   }
 
   // This way we select our button so long as the ActionSprout organization is the selected user.
@@ -59,5 +59,4 @@ function runFunctions() {
 }
 
 runFunctions();
-
 const intervalId = setInterval(runFunctions, 1000);
