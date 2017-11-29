@@ -41,6 +41,7 @@ function addASReposToPullRequestButtons() {
     navLinks.append($(linkToAllOpenPRs)[0]);
 
     $('.subnav-search-input-wide').css('width','450px');
+    $('.subnav-item:last-child').css('border-left','0px');
   }
 }
 
