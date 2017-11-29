@@ -33,12 +33,12 @@ function applyStylesToPullRequestLabels() {
 function addASReposToPullRequestButtons() {
   let navLinks = $('.subnav-links')[0];
 
-  const asReposButton = $('.subnav-links a[aria-label~=ActionSprout]')[0]
+  const asReposButton = $('.subnav-links a[aria-label~=ActionSprout]')[0];
 
   if (!asReposButton) {
-    const asPrLink = '<a href="/pulls?utf8=%E2%9C%93&q=is%3Apr+user%3AActionSprout+sort%3Aupdated-desc+is%3Aopen+" aria-label="ActionSprout open pull requests" class="js-selected-navigation-item subnav-item" role="tab">AS Repos</a>';
+    const linkToAllOpenPRs = '<a href="/pulls?utf8=%E2%9C%93&q=is%3Apr+user%3AActionSprout+sort%3Aupdated-desc+is%3Aopen+" aria-label="ActionSprout open pull requests" class="js-selected-navigation-item subnav-item" role="tab">AS Repos</a>';
 
-    navLinks.append($(asPrLink)[0]);
+    navLinks.append($(linkToAllOpenPRs)[0]);
 
     $('.subnav-search-input-wide').css('width','450px');
   }
