@@ -32,13 +32,22 @@ function applyStylesToPullRequestLabels() {
 
 function addASReposToPullRequestButtons() {
   let navLinks = $('.subnav-links')[0];
+  const $navLinks = $('a.subnav-item', navLinks);
+  const $asReposButton = $('.subnav-links a[aria-label~=ActionSprout]')[0];
 
-  const asReposButton = $('.subnav-links a[aria-label~=ActionSprout]')[0];
+  if (!$asReposButton) {
 
-  if (!asReposButton) {
-    const linkToAllOpenPRs = '<a href="/pulls?utf8=%E2%9C%93&q=is%3Apr+user%3AActionSprout+sort%3Aupdated-desc+is%3Aopen+" aria-label="ActionSprout open pull requests" class="js-selected-navigation-item subnav-item" role="tab">AS Repos</a>';
+    // If any of the other buttons are selected, don't select as-repos
+    if ($navLinks.hasClass('selected')) {
+      const unselectedLink = '<a href="/pulls?utf8=%E2%9C%93&q=is%3Apr+user%3AActionSprout+sort%3Aupdated-desc+is%3Aopen+" aria-label="ActionSprout open pull requests" class="js-selected-navigation-item subnav-item" role="tab">AS Repos</a>';
 
-    navLinks.append($(linkToAllOpenPRs)[0]);
+      navLinks.append($(unselectedLink)[0]);
+
+    } else {
+      const selectedLink = '<a href="/pulls?utf8=%E2%9C%93&q=is%3Apr+user%3AActionSprout+sort%3Aupdated-desc+is%3Aopen+" aria-label="ActionSprout open pull requests" class="js-selected-navigation-item selected subnav-item" role="tab">AS Repos</a>';
+
+      navLinks.append($(selectedLink)[0]);
+    }
 
     $('.subnav-search-input-wide').css('width','450px');
     $('.subnav-item:last-child').css('border-left','0px');
