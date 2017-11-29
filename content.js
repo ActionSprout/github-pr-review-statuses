@@ -14,7 +14,7 @@ const specific_styles = {
 
 const base_selector = 'a.tooltipped.tooltipped-s'
 
-function applyLabelStyles() {
+function applyStylesToPullRequestLabels() {
   const link_sets = {
     needs_review: $(`${base_selector}[aria-label="Review required before merging"]`),
     changes_requested: $(`${base_selector}[aria-label*="requesting changes"]`),
@@ -30,7 +30,7 @@ function applyLabelStyles() {
   });
 }
 
-function addASReposPRsButton() {
+function addASReposToPullRequestButtons() {
   let navLinks = $('.subnav-links')[0];
 
   if (navLinks.childElementCount < 5 ) {
@@ -42,12 +42,12 @@ function addASReposPRsButton() {
   }
 }
 
-applyLabelStyles();
-addASReposPRsButton();
+applyStylesToPullRequestLabels();
+addASReposToPullRequestButtons();
 
 function intervalTick() {
-  applyLabelStyles();
-  addASReposPRsButton();
+  applyStylesToPullRequestLabels();
+  addASReposToPullRequestButtons();
 }
 
 const intervalId = setInterval(intervalTick, 1000);
