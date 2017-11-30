@@ -12,9 +12,9 @@ const specific_styles = {
   },
 };
 
-const base_selector = 'a.tooltipped.tooltipped-s'
 
 function applyStylesToPullRequestLabels() {
+  const base_selector = 'a.tooltipped.tooltipped-s';
   const link_sets = {
     needs_review: $(`${base_selector}[aria-label="Review required before merging"]`),
     changes_requested: $(`${base_selector}[aria-label*="requesting changes"]`),
@@ -31,35 +31,32 @@ function applyStylesToPullRequestLabels() {
 }
 
 function addASReposToPullRequestButtons() {
-  let navLinks = $('.subnav-links')[0];
-  const $navLinks = $('a.subnav-item', navLinks);
-  const $asReposButton = $('.subnav-links a[aria-label~=ActionSprout]')[0];
+  const $subNav = $('div.subnav-links');
+  const findButton = () =>
+    $subNav.find('a[aria-label~=ActionSprout]')
+  ;
+  const asReposButton = findButton();
+  const user = 'ActionSprout';
+  const actionSproutSearch = `?q=is%3Aopen+is%3Apr+user%3A${user}+sort%3Aupdated-desc`;
 
-  if (!$asReposButton) {
-
-    // If any of the other buttons are selected, don't select as-repos
-    if ($navLinks.hasClass('selected')) {
-      const unselectedLink = '<a href="/pulls?utf8=%E2%9C%93&q=is%3Apr+user%3AActionSprout+sort%3Aupdated-desc+is%3Aopen+" aria-label="ActionSprout open pull requests" class="js-selected-navigation-item subnav-item" role="tab">AS Repos</a>';
-
-      navLinks.append($(unselectedLink)[0]);
-
-    } else {
-      const selectedLink = '<a href="/pulls?utf8=%E2%9C%93&q=is%3Apr+user%3AActionSprout+sort%3Aupdated-desc+is%3Aopen+" aria-label="ActionSprout open pull requests" class="js-selected-navigation-item selected subnav-item" role="tab">AS Repos</a>';
-
-      navLinks.append($(selectedLink)[0]);
-    }
-
-    $('.subnav-search-input-wide').css('width','450px');
-    $('.subnav-item:last-child').css('border-left','0px');
+  if (asReposButton.length === 0) {
+      const newButton = `<a href="/pulls${actionSproutSearch}" aria-label="ActionSprout open pull requests" class="js-selected-navigation-item subnav-item" role="tab">AS Repos</a>`;
+      $subNav.append(newButton);
   }
+
+  // This way we select our button so long as the ActionSprout organization is the selected user.
+  const userMatches = window.location.search.match(`user%3A${user}`)
+  const shouldSelect = userMatches ? userMatches.length > 0 : false;
+  if (shouldSelect) { findButton().addClass('selected'); }
+
+  $('.subnav-search-input-wide').css('width','450px');
+  $('.subnav-item:last-child').css('border-left','0px');
 }
 
-applyStylesToPullRequestLabels();
-addASReposToPullRequestButtons();
-
-function intervalTick() {
+function runFunctions() {
   applyStylesToPullRequestLabels();
   addASReposToPullRequestButtons();
 }
 
-const intervalId = setInterval(intervalTick, 1000);
+runFunctions();
+const intervalId = setInterval(runFunctions, 1000);
