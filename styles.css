@@ -16,3 +16,8 @@ div.get-on-your-on-line form {
 div.get-on-your-on-line form input {
   width: 100% !important;
 }
+
+div.subnav-links.float-right > a.toggle-as.selected {
+  background-color: #6bc17a !important;
+  border-color: #6bc17a !important;
+}

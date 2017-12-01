@@ -29,49 +29,44 @@ function applyStylesToPullRequestLabels() {
   });
 }
 
+
 function addASReposToPullRequestButtons() {
   const user = 'ActionSprout';
   const $subNavLeft = $('div.subnav-links');
 
-  const subNavLeftHtml = `
+  // Handle Left Nav - Toggle ActionSprout Button
+  const subNavRightHtml = `
     <div class="subnav-links float-right" role="navigation">
-      <a aria-label="Toggle user:actionsprout" class="toggle-as js-selected-navigation-item subnav-item" role="tab">Toggle ActionSprout</a>
+      <a href='' aria-label="Toggle user:actionsprout" class="toggle-as js-selected-navigation-item subnav-item" role="tab">Toggle ActionSprout</a>
     </div>
   `;
-  const $subNavRight = $(subNavLeftHtml);
+  const $subNavRight = $(subNavRightHtml);
 
   const $searchForm = $('.subnav-search.float-left');
   const $searchInput = $searchForm.find('input.subnav-search-input');
   $searchForm.parent().addClass('get-on-your-on-line');
+  const currentSearch = $searchInput.attr('value');
+  const userIsActionSprout = currentSearch.indexOf("user:ActionSprout") > -1;
 
   if ($('.subnav-links a.toggle-as').length === 0) {
     $subNavLeft.after($subNavRight);
     $subNavRight.find('a').click(function _toggleAsClick() {
-      console.log('Toggled!');
-      const currentSearch = $searchInput.attr('value');
-      console.log('current search', currentSearch);
-      const hasFilter = currentSearch.indexOf("user:ActionSprout") > -1;
-
-      let search = null;
-      if (hasFilter) {
-        // Remove Filter
-        console.log('Remove the filter!');
-        search = currentSearch.replace("user:ActionSprout", '');
-      } else {
-        // Add Filter
-        console.log('Add the filter!');
-        search = currentSearch + " user:ActionSprout";
-      }
+      const newSearch = userIsActionSprout ? currentSearch.replace("user:ActionSprout", '') : (currentSearch + " user:ActionSprout");
       // Submit Form "Manually"
-      window.location = `https://${window.location.host}/pulls?utf8=✓&q=${search}`;
+      window.location = `https://${window.location.host}/pulls?utf8=✓&q=${newSearch}`;
     });
   }
 
-  const findButton = () =>
+  if (userIsActionSprout) {
+    $subNavRight.find('.toggle-as').addClass('selected');
+  }
+
+  // Handle All As Repos Button
+  const findAllAsRepoButton = () =>
     $subNavLeft.find('a[aria-label~=ActionSprout]')
   ;
 
-  const asReposButton = findButton();
+  const asReposButton = findAllAsRepoButton();
   const actionSproutSearch = `?q=is%3Aopen+is%3Apr+user%3A${user}+sort%3Aupdated-desc`;
 
   if (asReposButton.length === 0) {
@@ -79,9 +74,13 @@ function addASReposToPullRequestButtons() {
       $subNavLeft.append(newButton);
   }
 
-  // This way we select our button so long as the ActionSprout organization is the selected user.
-
-  // if (shouldSelect) { findButton().addClass('selected'); }
+  // Highlight the All AS Repos button if the user is ActionSprout and there are no other default filters.
+  const hasAuthor = currentSearch.indexOf('author') > -1;
+  const hasAssignee = currentSearch.indexOf('assignee') > -1;
+  const hasReviewRequest = currentSearch.indexOf('review-requested') > -1;
+  const hasMentions = currentSearch.indexOf('mentions') > -1;
+  const onAllRepos = userIsActionSprout && !hasAuthor && !hasAssignee && !hasReviewRequest && !hasMentions;
+  if (onAllRepos) { findAllAsRepoButton().addClass('selected'); }
 
 }
 
