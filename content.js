@@ -12,6 +12,7 @@ const specific_styles = {
   },
 };
 
+
 function applyStylesToPullRequestLabels() {
   const base_selector = 'a.tooltipped.tooltipped-s';
   const link_sets = {
@@ -29,10 +30,13 @@ function applyStylesToPullRequestLabels() {
   });
 }
 
-
-function addASReposToPullRequestButtons() {
+function addActionSproutPRFilterButtons() {
   const user = 'ActionSprout';
+  const $searchForm = $('.subnav-search.float-left');
+  const $searchInput = $searchForm.find('input.subnav-search-input');
+  const currentSearch = $searchInput.attr('value');
   const $subNavLeft = $('div.subnav-links');
+  const userIsActionSprout = currentSearch.indexOf("user:ActionSprout") > -1;
 
   // Handle Left Nav - Toggle ActionSprout Button
   const subNavRightHtml = `
@@ -42,17 +46,12 @@ function addASReposToPullRequestButtons() {
   `;
   const $subNavRight = $(subNavRightHtml);
 
-  const $searchForm = $('.subnav-search.float-left');
-  const $searchInput = $searchForm.find('input.subnav-search-input');
   $searchForm.parent().addClass('get-on-your-on-line');
-  const currentSearch = $searchInput.attr('value');
-  const userIsActionSprout = currentSearch.indexOf("user:ActionSprout") > -1;
 
   if ($('.subnav-links a.toggle-as').length === 0) {
     $subNavLeft.after($subNavRight);
     $subNavRight.find('a').click(function _toggleAsClick() {
       const newSearch = userIsActionSprout ? currentSearch.replace("user:ActionSprout", '') : (currentSearch + " user:ActionSprout");
-      // Submit Form "Manually"
       window.location = `https://${window.location.host}/pulls?utf8=✓&q=${newSearch}`;
     });
   }
@@ -67,10 +66,10 @@ function addASReposToPullRequestButtons() {
   ;
 
   const asReposButton = findAllAsRepoButton();
-  const actionSproutSearch = `?q=is%3Aopen+is%3Apr+user%3A${user}+sort%3Aupdated-desc`;
+  const actionSproutSearch = `is:open is:pr user:${user} sort:updated-desc`;
 
   if (asReposButton.length === 0) {
-      const newButton = `<a href="/pulls${actionSproutSearch}" style="border-left: 0ps;" aria-label="ActionSprout open pull requests" class="js-selected-navigation-item subnav-item" role="tab">All AS Repos</a>`;
+      const newButton = `<a href="/pulls?utf8=✓&q=${actionSproutSearch}" style="border-left: 0ps;" aria-label="ActionSprout open pull requests" class="js-selected-navigation-item subnav-item" role="tab">All AS Repos</a>`;
       $subNavLeft.append(newButton);
   }
 
@@ -87,7 +86,7 @@ function addASReposToPullRequestButtons() {
 function runFunctions() {
   applyStylesToPullRequestLabels();
   if (window.location.pathname == '/pulls') {
-    addASReposToPullRequestButtons();
+    addActionSproutPRFilterButtons();
   }
 }
 
