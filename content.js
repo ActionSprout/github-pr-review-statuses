@@ -30,17 +30,32 @@ function applyStylesToPullRequestLabels() {
 }
 
 function addASReposToPullRequestButtons() {
-  const $subNav = $('div.subnav-links');
+  const $subNavLeft = $('div.subnav-links');
+
+  const subNavLeftHtml = `
+    <div class="subnav-links float-right" role="navigation">
+      <a aria-label="Toggle user:actionsprout" class="toggle-as js-selected-navigation-item subnav-item" role="tab">Toggle ActionSprout</a>
+    </div>
+  `;
+
+  const $subNavRight = $(subNavLeftHtml);
+  if ($('.subnav-links a.toggle-as').length === 0) {
+    $subNavLeft.after($subNavRight);
+
+    // $subNavRight.find('a').click()
+  }
+
   const findButton = () =>
-    $subNav.find('a[aria-label~=ActionSprout]')
+    $subNavLeft.find('a[aria-label~=ActionSprout]')
   ;
+
   const asReposButton = findButton();
   const user = 'ActionSprout';
   const actionSproutSearch = `?q=is%3Aopen+is%3Apr+user%3A${user}+sort%3Aupdated-desc`;
 
   if (asReposButton.length === 0) {
-      const newButton = `<a href="/pulls${actionSproutSearch}" aria-label="ActionSprout open pull requests" class="js-selected-navigation-item subnav-item" role="tab">AS Repos</a>`;
-      $subNav.append(newButton);
+      const newButton = `<a href="/pulls${actionSproutSearch}" style="border-left: 0ps;" aria-label="ActionSprout open pull requests" class="js-selected-navigation-item subnav-item" role="tab">All AS Repos</a>`;
+      $subNavLeft.append(newButton);
   }
 
   // This way we select our button so long as the ActionSprout organization is the selected user.
@@ -49,8 +64,6 @@ function addASReposToPullRequestButtons() {
   if (shouldSelect) { findButton().addClass('selected'); }
 
   $('.subnav-search.float-left').parent().addClass('get-on-your-on-line');
-
-  $('.subnav-item:last-child').css('border-left','0px');
 }
 
 function runFunctions() {
