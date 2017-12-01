@@ -30,6 +30,7 @@ function applyStylesToPullRequestLabels() {
 }
 
 function addASReposToPullRequestButtons() {
+  const user = 'ActionSprout';
   const $subNavLeft = $('div.subnav-links');
 
   const subNavLeftHtml = `
@@ -37,12 +38,33 @@ function addASReposToPullRequestButtons() {
       <a aria-label="Toggle user:actionsprout" class="toggle-as js-selected-navigation-item subnav-item" role="tab">Toggle ActionSprout</a>
     </div>
   `;
-
   const $subNavRight = $(subNavLeftHtml);
+
+  const $searchForm = $('.subnav-search.float-left');
+  const $searchInput = $searchForm.find('input.subnav-search-input');
+  $searchForm.parent().addClass('get-on-your-on-line');
+
   if ($('.subnav-links a.toggle-as').length === 0) {
     $subNavLeft.after($subNavRight);
+    $subNavRight.find('a').click(function _toggleAsClick() {
+      console.log('Toggled!');
+      const currentSearch = $searchInput.attr('value');
+      console.log('current search', currentSearch);
+      const hasFilter = currentSearch.indexOf("user:ActionSprout") > -1;
 
-    // $subNavRight.find('a').click()
+      let search = null;
+      if (hasFilter) {
+        // Remove Filter
+        console.log('Remove the filter!');
+        search = currentSearch.replace("user:ActionSprout", '');
+      } else {
+        // Add Filter
+        console.log('Add the filter!');
+        search = currentSearch + " user:ActionSprout";
+      }
+      // Submit Form "Manually"
+      window.location = `https://${window.location.host}/pulls?utf8=✓&q=${search}`;
+    });
   }
 
   const findButton = () =>
@@ -50,7 +72,6 @@ function addASReposToPullRequestButtons() {
   ;
 
   const asReposButton = findButton();
-  const user = 'ActionSprout';
   const actionSproutSearch = `?q=is%3Aopen+is%3Apr+user%3A${user}+sort%3Aupdated-desc`;
 
   if (asReposButton.length === 0) {
@@ -59,11 +80,9 @@ function addASReposToPullRequestButtons() {
   }
 
   // This way we select our button so long as the ActionSprout organization is the selected user.
-  const userMatches = window.location.search.match(`user%3A${user}`);
-  const shouldSelect = userMatches ? userMatches.length > 0 : false;
-  if (shouldSelect) { findButton().addClass('selected'); }
 
-  $('.subnav-search.float-left').parent().addClass('get-on-your-on-line');
+  // if (shouldSelect) { findButton().addClass('selected'); }
+
 }
 
 function runFunctions() {
