@@ -86,7 +86,9 @@ function addASReposToPullRequestButtons() {
 
 function runFunctions() {
   applyStylesToPullRequestLabels();
-  addASReposToPullRequestButtons();
+  if (window.location.pathname == '/pulls') {
+    addASReposToPullRequestButtons();
+  }
 }
 
 runFunctions();
