@@ -12,7 +12,6 @@ const specific_styles = {
   },
 };
 
-
 function applyStylesToPullRequestLabels() {
   const base_selector = 'a.tooltipped.tooltipped-s';
   const link_sets = {
@@ -45,11 +44,12 @@ function addASReposToPullRequestButtons() {
   }
 
   // This way we select our button so long as the ActionSprout organization is the selected user.
-  const userMatches = window.location.search.match(`user%3A${user}`)
+  const userMatches = window.location.search.match(`user%3A${user}`);
   const shouldSelect = userMatches ? userMatches.length > 0 : false;
   if (shouldSelect) { findButton().addClass('selected'); }
 
-  $('.subnav-search-input-wide').css('width','450px');
+  $('.subnav-search.float-left').parent().addClass('get-on-your-on-line');
+
   $('.subnav-item:last-child').css('border-left','0px');
 }
 

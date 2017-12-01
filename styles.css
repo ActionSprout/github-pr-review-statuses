@@ -1,3 +1,18 @@
 span.d-inline-block  a.muted-link.tooltipped.tooltipped-s[aria-label] {
   color: #fff !important;
 }
+
+div.get-on-your-on-line {
+  float: left !important;
+  display: block !important;
+  width: 100% !important;
+}
+
+div.get-on-your-on-line form {
+  margin: 20px 0px 0px 0px !important;
+  width: 100% !important;
+}
+
+div.get-on-your-on-line form input {
+  width: 100% !important;
+}
