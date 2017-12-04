@@ -35,17 +35,17 @@ function applyStylesToPullRequestLabels() {
 }
 
 function addActionSproutPRFilterButtons() {
-  const user = 'ActionSprout';
+  const user = 'user:ActionSprout';
   const $searchForm = $('.subnav-search.float-left');
   const $searchInput = $searchForm.find('input.subnav-search-input');
   const currentSearch = $searchInput.attr('value');
   const $subNavLeft = $('div.subnav-links');
-  const userIsActionSprout = currentSearch.indexOf("user:ActionSprout") > -1;
+  const userIsActionSprout = currentSearch.indexOf(user) > -1;
 
   // Handle Left Nav - Toggle ActionSprout Button
   const subNavRightHtml = `
     <div class="subnav-links float-right" role="navigation">
-      <a href='' aria-label="Toggle user:actionsprout" class="toggle-as js-selected-navigation-item subnav-item" role="tab">Toggle ActionSprout</a>
+      <a href='' aria-label="Toggle user:Actionsprout" class="toggle-as js-selected-navigation-item subnav-item" role="tab">Toggle user:ActionSprout</a>
     </div>
   `;
   const $subNavRight = $(subNavRightHtml);
@@ -55,7 +55,7 @@ function addActionSproutPRFilterButtons() {
   if ($('.subnav-links a.toggle-as').length === 0) {
     $subNavLeft.after($subNavRight);
     $subNavRight.find('a').click(function _toggleAsClick() {
-      const newSearch = userIsActionSprout ? currentSearch.replace("user:ActionSprout", '') : (currentSearch + " user:ActionSprout");
+      const newSearch = userIsActionSprout ? currentSearch.replace(user, '') : (currentSearch + " " + user);
       window.location = `https://${window.location.host}/pulls?utf8=✓&q=${newSearch}`;
     });
   }
@@ -70,7 +70,7 @@ function addActionSproutPRFilterButtons() {
   ;
 
   const asReposButton = findAllAsRepoButton();
-  const actionSproutSearch = `is:open is:pr user:${user} sort:updated-desc`;
+  const actionSproutSearch = `is:open is:pr ${user} sort:updated-desc`;
 
   if (asReposButton.length === 0) {
       const newButton = `<a href="/pulls?utf8=✓&q=${actionSproutSearch}" style="border-left: 0ps;" aria-label="ActionSprout open pull requests" class="js-selected-navigation-item subnav-item" role="tab">All AS Repos</a>`;
