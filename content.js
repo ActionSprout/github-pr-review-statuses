@@ -1,4 +1,9 @@
-// Going to find all the Review Status for PR's on the page.
+/* This chrome extension affects the github "Pull requests" route
+  - applies styles to the labels on each PR
+  - adds a button to all AS PRs (e.g. instead of just those you created)
+  - adds a button to toggle the filter 'user:ActionSprout'
+  - moves the search bar to a line of it's own
+*/
 
 const specific_styles = {
   needs_review_styles: {
@@ -11,7 +16,6 @@ const specific_styles = {
     'background': '#0e8a16',
   },
 };
-
 
 function applyStylesToPullRequestLabels() {
   const base_selector = 'a.tooltipped.tooltipped-s';
@@ -80,7 +84,6 @@ function addActionSproutPRFilterButtons() {
   const hasMentions = currentSearch.indexOf('mentions') > -1;
   const onAllRepos = userIsActionSprout && !hasAuthor && !hasAssignee && !hasReviewRequest && !hasMentions;
   if (onAllRepos) { findAllAsRepoButton().addClass('selected'); }
-
 }
 
 function runFunctions() {
