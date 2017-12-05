@@ -56,7 +56,7 @@ function addActionSproutPRFilterButtons() {
   const $subNavRight = $(subNavRightHtml);
 
   // Move search bar to its own line and lengthen
-  $searchForm.parent().addClass('get-on-your-on-line');
+  $searchForm.parent().addClass('get-on-your-own-line');
 
   // Implement the toggling of user:ActionSprout
   if ($('.subnav-links a.toggle-as').length === 0) {
