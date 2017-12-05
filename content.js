@@ -39,13 +39,15 @@ function addActionSproutPRFilterButtons() {
   const $searchForm = $('.subnav-search.float-left');
   const $searchInput = $searchForm.find('input.subnav-search-input');
   const currentSearch = $searchInput.attr('value');
+  const actionSproutSearch = `is:open is:pr ${user} sort:updated-desc`;
   const $subNavLeft = $('div.subnav-links');
   const userIsActionSprout = currentSearch.indexOf(user) > -1;
+  const jsNavItemClass = 'js-selected-navigation-item subnav-item';
 
   // Add button for toggling user:ActionSprout filter
   const subNavRightHtml = `
     <div class="subnav-links float-right" role="navigation">
-      <a href='' aria-label="Toggle user:Actionsprout" class="toggle-as js-selected-navigation-item subnav-item" role="tab">Toggle user:ActionSprout</a>
+      <a href='' aria-label="Toggle user:Actionsprout" class="toggle-as ${jsNavItemClass}" role="tab">Toggle ${user}</a>
     </div>
   `;
   const $subNavRight = $(subNavRightHtml);
@@ -73,11 +75,10 @@ function addActionSproutPRFilterButtons() {
   ;
 
   const asReposButton = findAllAsRepoButton();
-  const actionSproutSearch = `is:open is:pr ${user} sort:updated-desc`;
 
   if (asReposButton.length === 0) {
   // If All AS Repos button isn't there, add it
-      const newButton = `<a href="/pulls?utf8=✓&q=${actionSproutSearch}" style="border-left: 0ps;" aria-label="ActionSprout open pull requests" class="js-selected-navigation-item subnav-item" role="tab">All AS Repos</a>`;
+      const newButton = `<a href="/pulls?utf8=✓&q=${actionSproutSearch}" style="border-left: 0ps;" aria-label="ActionSprout open pull requests" class="${jsNavItemClass}" role="tab">All AS Repos</a>`;
       $subNavLeft.append(newButton);
   }
 
