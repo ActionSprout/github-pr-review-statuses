@@ -1,3 +1,23 @@
 span.d-inline-block  a.muted-link.tooltipped.tooltipped-s[aria-label] {
   color: #fff !important;
 }
+
+div.get-on-your-own-line {
+  float: left !important;
+  display: block !important;
+  width: 100% !important;
+}
+
+div.get-on-your-own-line form {
+  margin: 20px 0px 0px 0px !important;
+  width: 100% !important;
+}
+
+div.get-on-your-own-line form input {
+  width: 100% !important;
+}
+
+div.subnav-links.float-right > a.toggle-as.selected {
+  background-color: #6bc17a !important;
+  border-color: #6bc17a !important;
+}
