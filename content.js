@@ -69,15 +69,13 @@ function addActionSproutPRFilterButtons() {
     $subNavRight.find('.toggle-as').addClass('selected');
   }
 
-  const findAllAsRepoButton = () =>
   // Find All AS Repos button
+  const allASReposButton = () =>
     $subNavLeft.find('a[aria-label~=ActionSprout]')
   ;
 
-  const asReposButton = findAllAsRepoButton();
-
-  if (asReposButton.length === 0) {
   // If All AS Repos button isn't there, add it
+  if (allASReposButton().length === 0) {
       const newButton = `<a href="/pulls?utf8=✓&q=${actionSproutSearch}" style="border-left: 0ps;" aria-label="ActionSprout open pull requests" class="${jsNavItemClass}" role="tab">All AS Repos</a>`;
       $subNavLeft.append(newButton);
   }
@@ -88,7 +86,7 @@ function addActionSproutPRFilterButtons() {
   const hasReviewRequest = currentSearch.indexOf('review-requested') > -1;
   const hasMentions = currentSearch.indexOf('mentions') > -1;
   const onAllRepos = userIsActionSprout && !hasAuthor && !hasAssignee && !hasReviewRequest && !hasMentions;
-  if (onAllRepos) { findAllAsRepoButton().addClass('selected'); }
+  if (onAllRepos) { allASReposButton().addClass('selected'); }
 }
 
 function runFunctions() {
