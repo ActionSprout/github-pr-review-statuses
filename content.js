@@ -42,7 +42,7 @@ function addActionSproutPRFilterButtons() {
   const $subNavLeft = $('div.subnav-links');
   const userIsActionSprout = currentSearch.indexOf(user) > -1;
 
-  // Handle Left Nav - Toggle ActionSprout Button
+  // Add button for toggling user:ActionSprout filter
   const subNavRightHtml = `
     <div class="subnav-links float-right" role="navigation">
       <a href='' aria-label="Toggle user:Actionsprout" class="toggle-as js-selected-navigation-item subnav-item" role="tab">Toggle user:ActionSprout</a>
@@ -50,8 +50,10 @@ function addActionSproutPRFilterButtons() {
   `;
   const $subNavRight = $(subNavRightHtml);
 
+  // Move search bar to its own line and lengthen
   $searchForm.parent().addClass('get-on-your-on-line');
 
+  // Implement the toggling of user:ActionSprout
   if ($('.subnav-links a.toggle-as').length === 0) {
     $subNavLeft.after($subNavRight);
     $subNavRight.find('a').click(function _toggleAsClick() {
@@ -60,12 +62,13 @@ function addActionSproutPRFilterButtons() {
     });
   }
 
+  // Highlight the toggle AS button if user:ActionSprout present in filter
   if (userIsActionSprout) {
     $subNavRight.find('.toggle-as').addClass('selected');
   }
 
-  // Handle All As Repos Button
   const findAllAsRepoButton = () =>
+  // Find All AS Repos button
     $subNavLeft.find('a[aria-label~=ActionSprout]')
   ;
 
@@ -73,11 +76,12 @@ function addActionSproutPRFilterButtons() {
   const actionSproutSearch = `is:open is:pr ${user} sort:updated-desc`;
 
   if (asReposButton.length === 0) {
+  // If All AS Repos button isn't there, add it
       const newButton = `<a href="/pulls?utf8=✓&q=${actionSproutSearch}" style="border-left: 0ps;" aria-label="ActionSprout open pull requests" class="js-selected-navigation-item subnav-item" role="tab">All AS Repos</a>`;
       $subNavLeft.append(newButton);
   }
 
-  // Highlight the All AS Repos button if the user is ActionSprout and there are no other default filters.
+  // Highlight All AS Repos button if user:ActionSprout and no other default filters
   const hasAuthor = currentSearch.indexOf('author') > -1;
   const hasAssignee = currentSearch.indexOf('assignee') > -1;
   const hasReviewRequest = currentSearch.indexOf('review-requested') > -1;
