@@ -36,18 +36,21 @@ function applyStylesToPullRequestLabels() {
 
 function addActionSproutPRFilterButtons() {
   const user = 'user:ActionSprout';
+  const jsNavItemClass = 'js-selected-navigation-item subnav-item';
+
+  const $subNavLeft = $('div.subnav-links');
+
   const $searchForm = $('.subnav-search.float-left');
   const $searchInput = $searchForm.find('input.subnav-search-input');
   const currentSearch = $searchInput.attr('value');
-  const actionSproutSearch = `is:open is:pr ${user} sort:updated-desc`;
-  const $subNavLeft = $('div.subnav-links');
+
   const userIsActionSprout = currentSearch.indexOf(user) > -1;
-  const jsNavItemClass = 'js-selected-navigation-item subnav-item';
+  const actionSproutSearch = `is:open is:pr ${user} sort:updated-desc`;
 
   // Add button for toggling user:ActionSprout filter
   const subNavRightHtml = `
     <div class="subnav-links float-right" role="navigation">
-      <a href='' aria-label="Toggle user:Actionsprout" class="toggle-as ${jsNavItemClass}" role="tab">Toggle ${user}</a>
+      <a href='' aria-label="Toggle ${user}" class="toggle-as ${jsNavItemClass}" role="tab">Toggle ${user}</a>
     </div>
   `;
   const $subNavRight = $(subNavRightHtml);
