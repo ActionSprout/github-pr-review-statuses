@@ -79,7 +79,7 @@ function addActionSproutPRFilterButtons() {
 
   // If All AS Repos button isn't there, add it
   if (allASReposButton().length === 0) {
-      const newButton = `<a href="/pulls?utf8=✓&q=${actionSproutSearch}" style="border-left: 0ps;" aria-label="ActionSprout open pull requests" class="${jsNavItemClass}" role="tab">All AS Repos</a>`;
+      const newButton = `<a href="/pulls?utf8=✓&q=${actionSproutSearch}" style="border-left: 0ps;" aria-label="ActionSprout open pull requests" class="${jsNavItemClass}" role="tab">All Open AS Repos</a>`;
       $subNavLeft.append(newButton);
   }
 
