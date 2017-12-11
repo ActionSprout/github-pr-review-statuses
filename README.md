@@ -23,8 +23,8 @@ A Chrome Extension for visually labeling Github Pull Request Review Statuses
 
 If you are developing new changes to this repository, you will need to do the following in order to test your suggested changes:
 
-0. Checkout a new branch and implement your changes
+1. Checkout a new branch and implement your changes
 1. Enable Developer Mode in your Chrome Extension Page
-2. Load the extension as an Unpacked extension
-3. On the extensions page click reload all now
-4. Refresh the page you are working on
+1. Load the extension as an Unpacked extension
+1. On the extensions page click reload all now
+1. Refresh the page you are working on
