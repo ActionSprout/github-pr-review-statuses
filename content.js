@@ -94,7 +94,7 @@ function addActionSproutPRFilterButtons() {
 
 function runFunctions() {
   applyStylesToPullRequestLabels();
-  if (window.location.pathname.indexOf('/pulls') > -1) {
+  if (window.location.pathname.indexOf('.com/pulls') > -1) {
     addActionSproutPRFilterButtons();
   }
 }
